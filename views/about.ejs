@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+      crossorigin="anonymous"
+    />
+    <title>Document</title>
+  </head>
+  <body>
+    <%- include('partials/nav-bar') %>
+
+    <div class="container mt-4">
+      <h1>Informatie pagina</h1>
+      <h5>
+        Deze website is gemaakt in 3 weken tijd, met node.js, express, .ejs,
+        mysql. Merkwaardig is dat alle asynchrone acties met callbacks zijn
+        gedaan.
+      </h5>
+
+      <div class="row g-3">
+        <!-- g-3 = ruimte tussen de cards -->
+        <div class="col-md-4">
+          <div class="card h-100">
+            <h2 class="card-title">Authenticatie:</h2>
+            <p class="card-text">Inloggen (en uitloggen) op de website</p>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="card h-100">
+            <h2 class="card-title">Filmbeheer:</h2>
+            <p class="card-text">
+              Films toevoegen, op naam zoeken en verwijderen
+            </p>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="card h-100">
+            <h2 class="card-title">Personeel:</h2>
+            <p class="card-text">
+              Overzicht van de staf bekijken en details van een staflid inzien
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+
+<style>
+  .card {
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    cursor: pointer;
+  }
+</style>

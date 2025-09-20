@@ -1,0 +1,28 @@
+{
+  "name": "generated",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node ./bin/www",
+    "start-dev": "nodemon ./bin/www"
+  },
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "dotenv": "^17.2.2",
+    "ejs": "^3.1.10",
+    "express": "^4.21.2",
+    "express-session": "^1.18.2",
+    "http-errors": "~1.6.3",
+    "i": "^0.3.7",
+    "morgan": "^1.10.1",
+    "mysql2": "^3.14.4",
+    "winston": "^3.17.0"
+  },
+  "devDependencies": {
+    "cypress": "^15.2.0",
+    "nodemon": "^3.1.10"
+  }
+}

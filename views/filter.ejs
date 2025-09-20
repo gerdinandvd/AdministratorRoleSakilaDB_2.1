@@ -1,0 +1,125 @@
+<% const pageurl = "http://localhost:3000/administration/"; %>
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>filter</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+      crossorigin="anonymous"
+    />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  </head>
+  <body>
+    <%- include('partials/nav-bar') %>
+
+    <div>
+      <div>
+        <div class="d-flex justify-content-center mt-5 gap-2">
+          <form
+            action="/administration/filter"
+            method="get"
+            class="d-flex gap-2 w-50"
+          >
+            <input
+              class="form-control"
+              type="text"
+              name="search"
+              placeholder="Search.."
+            />
+            <button class="btn btn-primary">Zoeken</button>
+          </form>
+
+          <a href="<%= pageurl + 'add' %>">
+            <button class="btn btn-secondary">+ Nieuwe film</button>
+          </a>
+        </div>
+
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-10">
+              <table
+                class="table border mt-5 table-striped table-hover text-center"
+              >
+                <thead>
+                  <tr>
+                    <th>Titel</th>
+                    <th>Genre</th>
+                    <th>Jaar</th>
+                    <th>Tijd</th>
+                    <th>Beoordeling</th>
+                  </tr>
+                </thead>
+                <% films.forEach((film) => { %>
+                <tr
+                  id="film-<%= film.id %>"
+                  data-id="<%= film.id %>"
+                  onclick="OpenPopUpDelete(this.dataset.id)"
+                >
+                  <!--</tr>onclick="OpenPopUpDelete(film.id)"> -->
+                  <td><%= film.title %></td>
+                  <td><%= film.category %></td>
+                  <td><%= film.year %></td>
+                  <td><%= film.time %></td>
+                  <td><%= film.rating %></td>
+                </tr>
+                <% }) %>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div
+          class="d-none card position-fixed w-25 h-25 top-50 start-50 translate-middle"
+          id="delete_popup"
+        >
+          <h2>Wilt u dit verwijderen?</h2>
+          <div
+            class="d-flex justify-content-between position-absolute bottom-0 w-100 p-2"
+          >
+            <button id="cancel-btn" class="btn btn-secondary flex-fill me-2">
+              Annuleren
+            </button>
+            <button id="delete-btn" class="btn btn-danger flex-fill ms-2">
+              Verwijderen
+            </button>
+          </div>
+        </div>
+
+        <!-- class="d-none" -->
+      </div>
+    </div>
+  </body>
+</html>
+
+<script>
+  function OpenPopUpDelete(id) {
+    const delete_popup = document.getElementById("delete_popup");
+    const cancel_btn = document.getElementById("cancel-btn");
+    const delete_btn = document.getElementById("delete-btn");
+    delete_popup.classList.remove("d-none");
+    cancel_btn.onclick = () => ClosePopUpDelete(id);
+    delete_btn.onclick = () => DeleteFilm(id);
+  }
+
+  function ClosePopUpDelete(id) {
+    const delete_popup = document.getElementById("delete_popup");
+    delete_popup.classList.add("d-none");
+  }
+
+  function DeleteFilm(id) {
+    fetch(`/administration/filter/${id}`, {
+      method: "DELETE",
+    }).then((res) => {
+      if (res.ok) {
+        document.getElementById(`film-${id}`).remove();
+        ClosePopUpDelete(id);
+      } else {
+        alert("Verwijderen mislukt ", id);
+      }
+    });
+  }
+</script>
