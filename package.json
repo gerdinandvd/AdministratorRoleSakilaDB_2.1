@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "start": "node ./bin/www",
-    "start-dev": "nodemon ./bin/www"
+    "start-dev": "nodemon ./bin/www",
+    "test:e2e": "cypress run --spec 'cypress/e2e/staff-members/my-test.cy.js'"
   },
   "dependencies": {
     "bcrypt": "^6.0.0",

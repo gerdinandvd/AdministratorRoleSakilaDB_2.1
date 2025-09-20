@@ -23,7 +23,7 @@ eslintcache
 *.tgz
 # Yarn Integrity file
 yarn-integrity
-# dotenv environment variables file
+# dotenv environment variables file 
 env.test
 # Parcel-bundler cache
 cache
