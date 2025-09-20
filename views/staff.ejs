@@ -30,7 +30,13 @@
 
     <div class="card-body">
       <h5 class="card-title"><%= member.first_name %> <%= member.last_name %></h5>
-      <p class="card-text"><%= member.isActive %></p>
+      <p class="card-text"><% if(member.isActive) { %>
+      <img src="/images/greencircle.png" alt="actief" style="width: 15px; height: 15px;" />
+      <% } else { %>
+      <img src="/images/graycircle.png" alt="niet actief" style="width: 15px; height: 15px;" />
+      <% } %>
+      
+      </p>
     </div>
   </div>
 </div>

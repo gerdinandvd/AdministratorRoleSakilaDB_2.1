@@ -20,4 +20,6 @@ Deze website is in drie weken ontwikkeld met gebruik van Node.js, Express, EJS e
 
 - Details van individuele medewerkers raadplegen
 
+- De stafleden via sms of email berichten
+
 Ontwikkeld aan de **Avans Hogeschool**

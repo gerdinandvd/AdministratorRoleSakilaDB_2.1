@@ -23,15 +23,20 @@
 
           <h2 class="h5">E-Mail</h2>
           <p class="mb-1"><%= staff_member.email %></p>
-          <button class="btn btn-outline-primary btn-sm mb-4">
-            Contacteer
-          </button>
+          <!-- opent default mailclient en laat de gebruiker schrijven -->
+          <a href="mailto:<%= staff_member.email %>">
+            <button class="btn btn-outline-primary btn-sm mb-4">
+              Contacteer
+            </button></a
+          >
 
           <h2 class="h5">Telefoonnummer</h2>
           <p class="mb-1"><%= staff_member.phone %></p>
-          <button class="btn btn-outline-primary btn-sm mb-4">
-            Contacteer
-          </button>
+          <a href="sms:<%= staff_member.phone %>">
+            <button class="btn btn-outline-primary btn-sm mb-4">
+              Contacteer
+            </button>
+          </a>
 
           <h2 class="h5">Woonplaats</h2>
           <p class="mb-0">Land: <%= staff_member.live_country %></p>
