@@ -1,5 +1,5 @@
-import pool from "../src/utils/pool.js";
-import { logger } from "../src/utils/logger.js";
+import pool from "../utils/pool.js";
+import { logger } from "../utils/logger.js";
 
 class PostFilmDao {
   PostFilms(post_film_dto, callback) {

@@ -1,6 +1,6 @@
 //import { use } from "react";
 import bcrypt from "bcrypt";
-import pool from "../src/utils/pool.js";
+import pool from "../utils/pool.js";
 
 class LoginDAO {
   AreCredentialsValid(username, password, callback) {

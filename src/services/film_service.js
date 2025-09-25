@@ -1,7 +1,7 @@
 import films_dao from "../DAO/films_dao.js";
 import PostFilmDao from "../DAO/post_film_dao.js";
 import post_film_dto from "../DTO/post_film_dto.js";
-import { logger } from "../src/utils/logger.js";
+import { logger } from "../utils/logger.js";
 
 const filmsDAO = new films_dao();
 const postFilmDao = new PostFilmDao();

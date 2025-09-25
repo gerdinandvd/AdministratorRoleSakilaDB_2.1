@@ -2,7 +2,7 @@ import login_dao from "../DAO/login_dao.js";
 
 const loginDAO = new login_dao();
 
-class login_service {
+class LoginService {
   AreCredentialsValid(username, password, callback) {
     loginDAO.AreCredentialsValid(username, password, (err, result) => {
       if (err) return callback(err, null);
@@ -13,4 +13,4 @@ class login_service {
   }
 }
 
-export default login_service;
+export default LoginService;

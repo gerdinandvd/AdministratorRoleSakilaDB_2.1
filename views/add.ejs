@@ -14,207 +14,313 @@
   <body>
     <%- include('partials/nav-bar') %>
     <div class="container-fluid">
-      <div class="row pt-4">
-        <div class="col-4 ps-5">
-          <h2>titel</h2>
-          <input type="text" id="submit-title" placeholder="titel" />
-          <h2>Omschrijving</h2>
-          <textarea
-            id="submit-description"
-            placeholder="Omschrijving"
-          ></textarea>
-          <h2>Jaar</h2>
-          <input type="month" id="submit-release_year" name="year" />
-          <h2>Duur</h2>
-          <input type="time" id="submit-time" name="appt" />
-          <h2>Taal</h2>
-          <select id="submit-language" name="language">
-            <% languages.forEach(lang => { %>
-            <option value="<%= lang.language_id %>">
-              <%= lang.language %>
-            </option>
-            <% }) %>
-          </select>
+      <h1 class="text-center my-4">Film toevoegen</h1>
+      <form id="film-form" action="/administration/add" method="POST">
+        <h2>Titel</h2>
+        <input type="text" name="title" class="form-control" required />
+        <h2>Omschrijving</h2>
+        <textarea name="description" class="form-control" required></textarea>
+        <h2>Jaar</h2>
+        <input type="month" name="release_year" class="form-control" required />
+        <h2>Duur</h2>
+        <input type="time" name="length" class="form-control" required />
+        <h2>Taal</h2>
+        <select name="language" class="form-select" required>
+          <% languages.forEach(lang => { %>
+          <option value="<%= lang.language_id %>"><%= lang.language %></option>
+          <% }) %>
+        </select>
 
-          <h2>Huur</h2>
-          <input
-            type="number"
-            id="submit-rental"
-            placeholder="Huur"
-            onchange="handleRentalRate(this)"
-          />
-          <p id="rental-field">$</p>
-          <h2>Aankoopprijs</h2>
-          <input
-            type="number"
-            id="submit-replacement_cost"
-            placeholder="2.99"
-            onchange="handleReplacementCost(this)"
-          />
-          <p id="replacement-field">$</p>
-          <h2>huurtijd</h2>
-          <input
-            type="range"
-            id="submit-rental_duration"
-            min="1"
-            max="10"
-            value="3"
-          />
-          <p><span id="rental_duration_value">3</span></p>
-        </div>
-        <div class="col-7 d-flex flex-column">
-          <div class="row">
-            <div class="col-6">
-              <h2>Genre</h2>
-              <form id="submit-categories" class="mt-3">
-                <% categories.forEach(category => { %>
-                <div class="form-check form-check-inline">
-                  <input
-                    class="form-check-input"
-                    type="checkbox"
-                    name="categories[]"
-                    id="category-<%= category.id %>"
-                    value="<%= category.id %>"
-                  />
-                  <label
-                    class="form-check-label"
-                    for="category-<%= category.id %>"
-                  >
-                    <%= category.name %>
-                  </label>
-                </div>
-                <% }) %>
-              </form>
-            </div>
-            <div class="col-6">
-              <h2>Beoordeling</h2>
-              <form class="container mt-3">
-                <div class="row">
-                  <div class="col-6">
-                    <div class="form-check">
-                      <input
-                        type="radio"
-                        class="form-check-input"
-                        name="choice"
-                        value="PG"
-                        id="pg"
-                      />
-                      <label class="form-check-label" for="pg">PG</label>
-                    </div>
-                    <div class="form-check">
-                      <input
-                        type="radio"
-                        class="form-check-input"
-                        name="choice"
-                        value="G"
-                        id="g"
-                      />
-                      <label class="form-check-label" for="g">G</label>
-                    </div>
-                  </div>
-                  <div class="col-6">
-                    <div class="form-check">
-                      <input
-                        type="radio"
-                        class="form-check-input"
-                        name="choice"
-                        value="NC-17"
-                        id="nc17"
-                      />
-                      <label class="form-check-label" for="nc17">NC-17</label>
-                    </div>
-                    <div class="form-check">
-                      <input
-                        type="radio"
-                        class="form-check-input"
-                        name="choice"
-                        value="PG-13"
-                        id="pg13"
-                      />
-                      <label class="form-check-label" for="pg13">PG-13</label>
-                    </div>
-                    <div class="form-check">
-                      <input
-                        type="radio"
-                        class="form-check-input"
-                        name="choice"
-                        value="R"
-                        id="r"
-                      />
-                      <label class="form-check-label" for="r">R</label>
-                    </div>
-                  </div>
-                </div>
-              </form>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-6">
-              <div class="">
-                <h2>Acteurs</h2>
-                <input
-                  id="actor-first_name"
-                  type="text"
-                  placeholder="Voornaam"
-                />
-                <input
-                  id="actor-last_name"
-                  type="text"
-                  placeholder="Achternaam"
-                />
-                <button
-                  type="button"
-                  id="add_actor-btn"
-                  onclick="AddActor(this)"
-                >
-                  +
-                </button>
-              </div>
-              <div id="actors-field" class="d-flex flex-column gap-2"></div>
-            </div>
-            <div class="col-6">
-              <h2>Specialiteit</h2>
-              <input
-                id="special_feature_text"
-                type="text"
-                list="special_features_list"
-                placeholder="Trailers,Commentaries,Deleted Scenes,Behind the Scenes"
-              />
-              <datalist id="special_features_list">
-                <option value="Trailers"></option>
-                <option value="Commentaries"></option>
-                <option value="Deleted Scenes"></option>
-                <option value="Behind the Scenes"></option>
-              </datalist>
+        <h2>Huur</h2>
+        <input
+          type="number"
+          name="rental_rate"
+          placeholder="Huur"
+          onchange="handleRentalRate(this)"
+          class="form-control"
+        />
+        <p id="rental-field">$</p>
+        <h2>Aankoopprijs</h2>
+        <input
+          type="number"
+          name="replacement_cost"
+          placeholder="2.99"
+          onchange="handleReplacementCost(this)"
+          class="form-control"
+        />
+        <p id="replacement-field">$</p>
+        <h2>Huurtijd</h2>
+        <input
+          type="range"
+          name="rental_duration"
+          min="1"
+          max="10"
+          value="3"
+          class="form-range"
+        />
+        <p><span id="rental_duration_value">3</span></p>
 
-              <button
-                type="button"
-                id="add_special_feature-btn"
-                onclick="AddSpecialFeature(this)"
-              >
-                +
-              </button>
-              <div
-                id="special_features_field"
-                class="d-flex flex-column gap-2"
-              ></div>
-            </div>
-          </div>
-          <div class="row mt-auto">
-            <div class="col-6">
-              <button onclick="PostFilm()" class="btn btn-primary w-75">
-                Opslaan
-              </button>
-            </div>
-            <div class="col-6">
-              <a href="/administration/filter"
-                ><button class="btn btn-secondary w-50">Annuleren</button>
-              </a>
-            </div>
-          </div>
+        <h2>Genre</h2>
+        <% categories.forEach(category => { %>
+        <div class="form-check form-check-inline">
+          <input
+            class="form-check-input"
+            type="checkbox"
+            name="categories[]"
+            value="<%= category.id %>"
+          />
+          <label class="form-check-label"> <%= category.name %> </label>
         </div>
-      </div>
+        <% }) %>
+
+        <h2>Beoordeling</h2>
+
+        <div class="form-check">
+          <input
+            type="radio"
+            class="form-check-input"
+            name="rating"
+            value="PG"
+            required
+          />
+          <label class="form-check-label">PG</label>
+        </div>
+        <div class="form-check">
+          <input
+            type="radio"
+            class="form-check-input"
+            name="rating"
+            value="G"
+            required
+          />
+          <label class="form-check-label">G</label>
+        </div>
+
+        <div class="form-check">
+          <input
+            type="radio"
+            class="form-check-input"
+            name="rating"
+            value="NC-17"
+            required
+          />
+          <label class="form-check-label">NC-17</label>
+        </div>
+        <div class="form-check">
+          <input
+            type="radio"
+            class="form-check-input"
+            name="rating"
+            value="PG-13"
+            required
+          />
+          <label class="form-check-label">PG-13</label>
+        </div>
+        <div class="form-check">
+          <input
+            type="radio"
+            class="form-check-input"
+            name="rating"
+            value="R"
+            required
+          />
+          <label class="form-check-label">R</label>
+        </div>
+
+        <h2>Acteurs</h2>
+        <div class="d-flex gap-2 mb-2">
+          <input
+            type="text"
+            id="actor-first_name"
+            placeholder="Voornaam"
+            class="form-control"
+          />
+          <input
+            type="text"
+            id="actor-last_name"
+            placeholder="Achternaam"
+            class="form-control"
+          />
+          <button type="button" id="add-actor-btn" class="btn btn-success">
+            +
+          </button>
+        </div>
+
+        <table class="table" id="actors-table">
+          <thead>
+            <tr></tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+
+        <h2>Specialiteiten</h2>
+        <div id="special-features-wrapper">
+          <div class="input-group mb-2 special-row">
+            <input
+              type="text"
+              id="special_features"
+              class="form-control"
+              list="special_features_list"
+            />
+            <button
+              type="button"
+              id="add-special_feature-btn"
+              class="btn btn-success btn-add-special"
+            >
+              +
+            </button>
+          </div>
+          <table class="table" id="special_features-table">
+            <thead>
+              <tr></tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+
+        <datalist id="special_features_list">
+          <option value="Trailers"></option>
+          <option value="Commentaries"></option>
+          <option value="Deleted Scenes"></option>
+          <option value="Behind the Scenes"></option>
+        </datalist>
+
+        <button type="submit" class="btn btn-primary mt-3">Opslaan</button>
+
+        <a href="/administration/filter"><button>Annuleren</button> </a>
+      </form>
     </div>
+    <script>
+      InitializeActors();
+      InitializeSpecialFeatures();
+
+      function InitializeActors() {
+        const addActorBtn = document.getElementById("add-actor-btn");
+        const actorsTableBody = document.querySelector("#actors-table tbody");
+
+        addActorBtn.addEventListener("click", function () {
+          const firstName = document
+            .getElementById("actor-first_name")
+            .value.trim();
+          const lastName = document
+            .getElementById("actor-last_name")
+            .value.trim();
+
+          if (!IsValidName(firstName) || !IsValidName(lastName)) {
+            alert("Naam mag alleen letters bevatten.");
+            return;
+          }
+
+          if (!firstName || !lastName) {
+            alert("Vul beide velden in.");
+            return;
+          }
+
+          if (
+            Array.from(
+              actorsTableBody.querySelectorAll(
+                'input[name="actors_first_name[]"]'
+              )
+            ).some(
+              (input, index) =>
+                input.value === firstName &&
+                actorsTableBody.querySelectorAll(
+                  'input[name="actors_last_name[]"]'
+                )[index].value === lastName
+            )
+          ) {
+            alert("Deze acteur is al toegevoegd.");
+            return;
+          }
+
+          // Maak een nieuwe tabelrij
+          const tr = document.createElement("tr");
+          tr.innerHTML = `
+          <td>${firstName}<input type="hidden" name="actors_first_name[]" value="${firstName}"></td>
+          <td>${lastName}<input type="hidden" name="actors_last_name[]" value="${lastName}"></td>
+          <td><button type="button" class="btn btn-primary btn-remove">-</button></td>
+        `;
+
+          actorsTableBody.appendChild(tr);
+
+          // Maak de inputvelden leeg voor de volgende invoer
+          document.getElementById("actor-first_name").value = "";
+          document.getElementById("actor-last_name").value = "";
+        });
+
+        // Verwijder een actor
+        actorsTableBody.addEventListener("click", function (e) {
+          if (e.target.classList.contains("btn-remove")) {
+            e.target.closest("tr").remove();
+          }
+        });
+      }
+
+      function InitializeSpecialFeatures() {
+        const addSpecialFeatureBtn = document.getElementById(
+          "add-special_feature-btn"
+        );
+        const specialFeaturesTableBody = document.querySelector(
+          "#special_features-table tbody"
+        );
+
+        addSpecialFeatureBtn.addEventListener("click", function () {
+          const specialFeatureInput =
+            document.getElementById("special_features");
+          const specialFeature = specialFeatureInput.value.trim();
+
+          if (!specialFeature) return;
+
+          specialFeatureOptions = [
+            "Trailers",
+            "Commentaries",
+            "Deleted Scenes",
+            "Behind the Scenes",
+          ];
+
+          if (!specialFeatureOptions.includes(specialFeature)) {
+            alert("Ongeldige special feature. Kies uit de lijst.");
+            return;
+          }
+
+          if (
+            Array.from(
+              specialFeaturesTableBody.querySelectorAll(
+                'input[name="special_features[]"]'
+              )
+            ).some((input) => input.value === specialFeature)
+          ) {
+            alert("Deze special feature is al toegevoegd.");
+            return;
+          }
+
+          // Maak een nieuwe tabelrij
+          const tr = document.createElement("tr");
+          tr.innerHTML = `
+          <td>${specialFeature}<input type="hidden" name="special_features[]" value="${specialFeature}"></td>
+          <td><button type="button" class="btn btn-primary btn-remove-special">-
+      </button></td>
+        `;
+
+          specialFeaturesTableBody.appendChild(tr);
+
+          // Maak het inputveld leeg voor de volgende invoer
+          specialFeatureInput.value = "";
+        });
+
+        // Verwijder een special feature
+        specialFeaturesTableBody.addEventListener("click", function (e) {
+          if (e.target.classList.contains("btn-remove-special")) {
+            e.target.closest("tr").remove();
+          }
+        });
+      }
+
+      function IsValidName(name) {
+        const nameRegex = /^[a-zA-Z]+$/;
+        return nameRegex.test(name);
+      }
+    </script>
   </body>
   <script
     src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
@@ -222,269 +328,3 @@
     crossorigin="anonymous"
   ></script>
 </html>
-
-<script>
-  let actors = [];
-  let special_features = [];
-
-  const rental_duration_slider = document.getElementById(
-    "submit-rental_duration"
-  );
-  const rental_duration_value = document.getElementById(
-    "rental_duration_value"
-  );
-
-  rental_duration_slider.addEventListener("input", () => {
-    rental_duration_value.textContent = rental_duration_slider.value;
-  });
-
-  function handleRentalRate(input_field) {
-    const rental_field = document.getElementById("rental-field");
-    rental_field.textContent = "$" + input_field.value;
-  }
-
-  function handleReplacementCost(input_field) {
-    const replacement_field = document.getElementById("replacement-field");
-    replacement_field.textContent = "$" + input_field.value;
-  }
-
-  function PostFilm() {
-    const post_film = GetSubmitObject();
-    if (!post_film) {
-      return;
-    }
-
-    fetch("/administration/add", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(post_film),
-    })
-      .then((res) => {
-        if (!res.ok) {
-          throw new Error("Request failed " + res.status);
-        }
-        // eventueel doorsturen of succesmelding
-        window.location.href = "/administration/filter";
-      })
-      .catch((err) => {
-        console.error("Error posting film:", err);
-        alert("Kon film niet toevoegen");
-      });
-  }
-
-  function GetSubmitObject() {
-    const title = document.getElementById("submit-title").value;
-    const description = document.getElementById("submit-description").value;
-    const month_input = document.getElementById("submit-release_year").value;
-    const release_year = GrabYearFromMonthInput(month_input);
-    const time_input = document.getElementById("submit-time").value;
-    const length = GrabMinutesTimeInput(time_input);
-    const language = document.getElementById("submit-language").value;
-    const rental_rate = document.getElementById("submit-rental").value;
-    const replacement_cost = document.getElementById(
-      "submit-replacement_cost"
-    ).value;
-    const rental_duration = rental_duration_slider.value;
-    const categories_form = document.getElementById("submit-categories");
-    const selected = categories_form.querySelectorAll(
-      'input[name="categories[]"]:checked'
-    );
-    const categories = Array.from(selected).map((checkbox) => checkbox.value);
-    const rating_form = document.querySelector('input[name="choice"]:checked');
-    const rating = rating_form ? rating_form.value : null;
-
-    const post_film = {
-      title,
-      description,
-      release_year,
-      length,
-      language,
-      rental_rate,
-      replacement_cost,
-      rental_duration,
-      categories,
-      rating,
-      actors,
-      special_features,
-    };
-
-    const requiredFields = [
-      "title",
-      "description",
-      "release_year",
-      "length",
-      "language",
-      "rental_rate",
-      "replacement_cost",
-      "categories",
-      "rating",
-    ];
-
-    const missing = requiredFields.some((field) => {
-      const value = post_film[field];
-      if (Array.isArray(value)) {
-        return value.length === 0;
-      }
-      return !value;
-    });
-
-    if (missing) {
-      alert("Er missen verplichte velden");
-      return null;
-    }
-
-    return post_film;
-  } // finish
-
-  function AddActor(button) {
-    console.log("button pressed");
-    const first_name = document.getElementById("actor-first_name").value;
-    const last_name = document.getElementById("actor-last_name").value;
-
-    if (!first_name.trim() && !last_name.trim()) {
-      return;
-    }
-
-    if (!isValidName(first_name) && !isValidName(last_name)) {
-      return;
-    }
-
-    if (actors.length >= 10) {
-      button.disabled = true;
-      return;
-    }
-
-    const actor_in_list = actors.some(
-      (actor) =>
-        actor.first_name.toLowerCase() === first_name.toLowerCase() &&
-        actor.last_name.toLowerCase() === last_name.toLowerCase()
-    );
-
-    if (actor_in_list) {
-      alert("Deze special feature bestaat al!");
-      return;
-    }
-
-    document.getElementById("actor-first_name").value = "";
-    document.getElementById("actor-last_name").value = "";
-
-    const actor = { first_name, last_name };
-
-    actors.push(actor);
-
-    ShowAllActors();
-  }
-
-  function AddSpecialFeature(button) {
-    const validOptions = [
-      "Trailers",
-      "Commentaries",
-      "Deleted Scenes",
-      "Behind the Scenes",
-    ];
-
-    const special_feature = document.getElementById(
-      "special_feature_text"
-    ).value;
-
-    if (!validOptions.includes(special_feature)) {
-      alert(
-        "Ongeldige special feature. Geldige opties zijn: " +
-          validOptions.join(", ")
-      );
-      return;
-    }
-
-    if (!special_feature.trim()) {
-      alert("Vul eerst de voornaam en/of achternaam van een auteur in");
-      return;
-    }
-
-    if (!isValidName(special_feature)) {
-      alert("deze naam is ongeldig, alleen letters en cijfers");
-      return;
-    }
-
-    if (special_features.length >= 10) {
-      button.disabled = true;
-      alert("het limiet van acteurs is bereikt");
-      return;
-    }
-
-    const special_feature_in_list = special_features.some(
-      (f) => f.toLowerCase() === special_feature.toLowerCase()
-    );
-
-    if (special_feature_in_list) {
-      alert("Deze special feature bestaat al!");
-      return;
-    }
-
-    document.getElementById("special_feature_text").value = "";
-    special_features.push(special_feature);
-
-    ShowAllSpecialFeatures();
-  }
-
-  function ShowAllActors() {
-    const actors_field = document.getElementById("actors-field");
-    actors_field.replaceChildren();
-
-    for (let i = 0; i < actors.length; i++) {
-      const nieuweButton = document.createElement("button");
-      nieuweButton.className = "bg-light border rounded w-75";
-      nieuweButton.textContent =
-        actors[i].first_name + " " + actors[i].last_name;
-      actors_field.appendChild(nieuweButton);
-      nieuweButton.onclick = RemoveActorOnButtonClick.bind(null, i);
-    }
-  }
-
-  function ShowAllSpecialFeatures() {
-    const special_features_field = document.getElementById(
-      "special_features_field"
-    );
-    special_features_field.replaceChildren();
-
-    for (let i = 0; i < special_features.length; i++) {
-      const nieuweButton = document.createElement("button");
-      nieuweButton.className = "bg-light border rounded w-75";
-      nieuweButton.textContent = special_features[i];
-      special_features_field.appendChild(nieuweButton);
-      nieuweButton.onclick = RemoveSpecialFeatureOnButtonClick.bind(null, i);
-    }
-  }
-
-  function RemoveActorOnButtonClick(id) {
-    actors.splice(id, 1);
-    ShowAllActors();
-    document.getElementById("add_actor-btn").disabled = false;
-  }
-
-  function RemoveSpecialFeatureOnButtonClick(id) {
-    special_features.splice(id, 1);
-    ShowAllSpecialFeatures();
-    document.getElementById("add_special_feature-btn").disabled = false;
-  }
-
-  function isValidName(name) {
-    return /^[A-Za-z0-9\s\-]+$/.test(name.trim());
-  }
-
-  function GrabYearFromMonthInput(input) {
-    if (input) {
-      return parseInt(input.split("-")[0], 10);
-    }
-    return null;
-  }
-
-  function GrabMinutesTimeInput(input) {
-    if (input) {
-      const [hours, minutes] = input.split(":").map(Number);
-      return hours * 60 + minutes;
-    }
-    return null;
-  }
-</script>

@@ -9,12 +9,12 @@ import logger from "morgan";
 import { fileURLToPath } from "url";
 import session from "express-session";
 
-import indexRouter from "./routes/index.js";
+import indexRouter from "./src/routes/index.js";
 //import usersRouter from "./routes/users.js";
-import mainRouter from "./routes/staff.js";
-import administrationRouter from "./routes/administration.js";
-import loginRouter from "./routes/login.js";
-import aboutRouter from "./routes/about.js";
+import mainRouter from "./src/routes/staff.js";
+import administrationRouter from "./src/routes/administration.js";
+import loginRouter from "./src/routes/login.js";
+import aboutRouter from "./src/routes/about.js";
 import e from "express";
 
 const __filename = fileURLToPath(import.meta.url);

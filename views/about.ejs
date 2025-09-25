@@ -12,7 +12,14 @@
     <title>Document</title>
   </head>
   <body>
-    <%- include('partials/nav-bar') %>
+    <nav class="navbar bg-primary">
+      <ul class="nav w-100 justify-content-end">
+        <li class="border-end border-light"></li>
+        <li class="nav-item text-center">
+          <a class="nav-link text-white" href="/login/">Login</a>
+        </li>
+      </ul>
+    </nav>
 
     <div class="container mt-4">
       <h1>Informatie pagina</h1>
@@ -23,7 +30,6 @@
       </h5>
 
       <div class="row g-3">
-        <!-- g-3 = ruimte tussen de cards -->
         <div class="col-md-4">
           <div class="card h-100">
             <h2 class="card-title">Authenticatie:</h2>

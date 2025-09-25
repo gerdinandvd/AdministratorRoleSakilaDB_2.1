@@ -1,9 +1,9 @@
 import { staff_dto } from "../DTO/staff_dto.js";
 import staff_member_dto from "../DTO/staff_member_dto.js";
 
-import { logger } from "../src/utils/logger.js";
+import { logger } from "../utils/logger.js";
 
-import pool from "../src/utils/pool.js";
+import pool from "../utils/pool.js";
 
 const sql_query_staff_member = `
 

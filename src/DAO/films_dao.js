@@ -1,4 +1,4 @@
-import pool from "../src/utils/pool.js";
+import pool from "../utils/pool.js";
 
 import get_film_dto from "../DTO/get_film_dto.js";
 import get_film_categories_dto from "../DTO/get_film_category_dto.js";
